@@ -1,4 +1,4 @@
-package com.team.usermanager.user.repository;
+package com.team.usermanager.repository;
 
 /**
  * @author Created By zzbin .

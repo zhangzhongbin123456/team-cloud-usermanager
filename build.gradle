@@ -22,6 +22,9 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation('org.springframework.boot:spring-boot-starter')  //Core starter,包括 自动配置支持、 logging and YAML
     implementation 'org.springframework.boot:spring-boot-starter-web'   //构建Web，包含RESTful风格框架SpringMVC和默认的嵌入式容器Tomcat
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.2' //springboot集成mybatis
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'     //mysql连接驱动
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'      //lombook插卡包
 }
 
 dependencyManagement {

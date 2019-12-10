@@ -1,1 +1,41 @@
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+---
+spring:
+     profiles: dev
+     master_key : adcdefghijklmnopqrstuvwxyz123456
+
+     datasource:
+       driverClassName: com.mysql.jdbc.Driver
+       url: jdbc:mysql://localhost:3306/db_mcp_zh?useUnicode=true&amp;characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&tinyInt1isBit=false&useSSL=false
+       username: root
+       password: 123456
+
+---
+spring:
+  profiles: test
+  master_key : adcdefghijklmnopqrstuvwxyz123456
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.124.4.166:3306/db_mcp_zh?useUnicode=true&amp;characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&tinyInt1isBit=false&useSSL=false
+    username: root
+    password: YfaOegg25LX3
+
+---
+spring:
+  profiles: prod
+  master_key : adcdefghijklmnopqrstuvwxyz123456
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.124.4.166:3306/db_mcp_zh?useUnicode=true&amp;characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&tinyInt1isBit=false&useSSL=false
+    username: root
+    password: YfaOegg25LX3
 
