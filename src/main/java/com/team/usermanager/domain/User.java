@@ -2,6 +2,7 @@ package com.team.usermanager.domain;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -10,8 +11,12 @@ import java.io.Serializable;
  * @date: 2019/12/10
  */
 @Data
+@Entity
+@Table(name = "T_USER_ACCOUNT")
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

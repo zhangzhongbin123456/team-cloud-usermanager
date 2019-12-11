@@ -1,6 +1,14 @@
 spring:
   profiles:
     active: dev
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update    #无表创建有表更新
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 
 mybatis:
   configuration:
