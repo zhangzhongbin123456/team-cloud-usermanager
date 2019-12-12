@@ -14,4 +14,6 @@ public interface UserService {
     List<User> findAllUser();
 
     User findUserById(Long Id);
+
+    User findUserByNameAndPwd(String name ,String pwd);
 }
