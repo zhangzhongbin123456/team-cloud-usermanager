@@ -1,6 +1,6 @@
 package com.team.usermanager.repository;
 
-import com.team.usermanager.domain.User;
+import com.team.usermanager.domain.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 2019/10/15 17:35 .
  */
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    User findFirstByName(String name);
+    UserEntity findFirstByName(String name);
 
-    User findFirstByPhone(Long phone);
+    UserEntity findFirstByPhone(Long phone);
 }

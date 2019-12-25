@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -21,8 +22,9 @@ import java.sql.Timestamp;
 @ApiModel
 @Entity
 @Table(name = "T_USER_ACCOUNT")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
+    @Id
     @ApiModelProperty(value = "用户id", dataType = "String", name = "uid", example = "UUID")
     @NotBlank(message = "用户id不能为空")
     private String uid;
@@ -115,10 +117,19 @@ public class User implements Serializable {
     @ApiModelProperty(value = "删除时间", dataType = "Timestamp", name = "deleted_time", example = "null")
     private Timestamp deletedTime;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, Integer deptId, Integer groupId, Integer unitId, String token, @NotBlank(message = "户密码不能为空") String password, String name, String idCard, Long phone, String openId, String avatarUrl, Timestamp createdTime, Timestamp updatedTime, Timestamp deletedTime) {
+    public UserEntity(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, Integer unitId, @NotBlank(message = "户密码不能为空") String password, String name, Long phone) {
+        this.uid = uid;
+        this.unionId = unionId;
+        this.unitId = unitId;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+    }
+
+    public UserEntity(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, Integer deptId, Integer groupId, Integer unitId, String token, @NotBlank(message = "户密码不能为空") String password, String name, String idCard, Long phone, String openId, String avatarUrl, Timestamp createdTime, Timestamp updatedTime, Timestamp deletedTime) {
         this.uid = uid;
         this.unionId = unionId;
         this.deptId = deptId;

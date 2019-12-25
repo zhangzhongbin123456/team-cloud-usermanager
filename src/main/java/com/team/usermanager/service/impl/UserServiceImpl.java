@@ -1,16 +1,19 @@
 package com.team.usermanager.service.impl;
 
-import com.team.usermanager.domain.User;
+import com.team.usermanager.domain.UserEntity;
 import com.team.usermanager.mapper.UserMapper;
 import com.team.usermanager.pojo.BaseResponse;
+import com.team.usermanager.pojo.ExtraResponse;
+import com.team.usermanager.pojo.UserParam;
 import com.team.usermanager.repository.UserRepository;
 import com.team.usermanager.service.UserService;
+import com.team.usermanager.util.UUIDGenerator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,54 +24,45 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private UserRepository userRepository;
 
     /**
-     * @param map
-     * @return 登录
+     * 用户登录
+     *
+     * @param userParam
+     * @return BaseResponse
      */
     @Override
-    public BaseResponse Login(Map map) {
-        String name = (String) map.get("name");
-        User user = userRepository.findFirstByName(name);
-        if (Objects.isNull(user)) {
-            return new BaseResponse(1100, "用户不存在");
-        }
-        String pwd = (String) map.get("pwd");
-        if (!user.getPassword().equals(pwd)) {
-            return new BaseResponse(1101, "密码错误");
-        }
+    public BaseResponse login(UserParam userParam) {
+        if (StringUtils.isEmpty(userParam.userName) || StringUtils.isEmpty(userParam.passWord))
+            return BaseResponse.invalidParam("请输入用户名和密码");
+        UserEntity user = userRepository.findFirstByName(userParam.userName);
+        if (Objects.isNull(user)) return new BaseResponse(1100, "用户不存在");
+        if (!user.getPassword().equals(userParam.passWord)) return new BaseResponse(1101, "密码错误");
         return BaseResponse.SUCCESS;
     }
 
     /**
-     * @param map
-     * @return 注册
+     * 用户注册
+     *
+     * @param userParam
+     * @return
      */
-    public BaseResponse Register(Map map) {
-        String name = (String) map.get("name");
-        User user = userRepository.findFirstByName(name);
-        if (!Objects.isNull(user)) {
-            return new BaseResponse(1100, "用户名已被注册");
-        }
-        long phone = Long.parseLong((String) map.get("phone"));
-        if (!Objects.isNull(userRepository.findFirstByPhone(phone))) {
+    public BaseResponse register(UserParam userParam) {
+        if (!Objects.isNull(userRepository.findFirstByPhone(userParam.phone))) {
             return new BaseResponse(1100, "手机号已被注册");
         }
-        Date created_time = new Date();
-        String union_id = created_time.getTime() + (String) map.get("phone");
-        String password = (String) map.get("password");
-        String avatar_url = (String) map.get("avatar_url");
-        double d = Math.random();
-        String uid = String.valueOf((int)(d*1000000000));
-        if (userMapper.register(uid, union_id, password, name, phone, avatar_url, created_time) < 0) {   //这个一步用jpa简单
+        UserEntity user = userRepository.save(new UserEntity(UUIDGenerator.getUUID(),
+                new Date().getTime() + "" + userParam.phone,
+                1000, "123456", userParam.name, userParam.phone));
+        if (Objects.isNull(user)) {
             return BaseResponse.FAIL;
         }
-        return BaseResponse.SUCCESS;
+        return new ExtraResponse(user);
     }
 
 

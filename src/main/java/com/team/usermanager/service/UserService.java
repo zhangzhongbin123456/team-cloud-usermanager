@@ -1,6 +1,8 @@
 package com.team.usermanager.service;
 
 import com.team.usermanager.pojo.BaseResponse;
+import com.team.usermanager.pojo.UserParam;
+
 import java.util.Map;
 
 /**
@@ -10,8 +12,7 @@ import java.util.Map;
 
 public interface UserService {
 
-    BaseResponse Login(Map map);
+    BaseResponse login(UserParam userParam);
 
-    BaseResponse Register(Map map);
-
+    BaseResponse register(UserParam userParam);
 }
