@@ -29,4 +29,8 @@ public class UserController {
     public BaseResponse login(@RequestBody Map map) {
         return userService.Login(map);
     }
+    @PostMapping("/register")
+    public BaseResponse register(@RequestBody Map map) {
+        return userService.Register(map);
+    }
 }

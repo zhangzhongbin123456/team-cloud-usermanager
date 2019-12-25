@@ -14,4 +14,7 @@ import java.util.Map;
 public interface UserService {
 
     BaseResponse Login(Map map);
+
+    BaseResponse Register(Map map);
+
 }
