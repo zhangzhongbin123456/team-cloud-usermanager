@@ -15,7 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author viroyal.zzbin
  * @version 1.0
- * Swagger Configuration .
+ * @date: 2019/12/10
+ * @description: Swagger Configuration .
  */
 @Configuration      //表明是配置信息让spring启动时加载
 @EnableSwagger2     //启用Swagger2
@@ -45,7 +46,7 @@ public class SwaggerConfig {
                 .title("用户中心")      //标题
                 .description("springcloud用户中心API文档")        //描述
                 //.termsOfServiceUrl("www.baidu.com")        服务条款网址
-                .contact(new Contact("zzbin", "zzbin992@gmail.com", "gmail"))       //作者
+                .contact(new Contact("ZzbinXh", "zzbin992@gmail.com", "gmail"))       //作者
                 //.license("google")      执照
                 //.licenseUrl("https://www.google.com.tw/")       执照地址
                 .version("1.0")      //版本

@@ -1,12 +1,16 @@
 package com.team.usermanager.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * @author: Created By Zzbin
@@ -14,79 +18,121 @@ import java.util.Date;
  * @date: 2019/12/10
  */
 @Data
+@ApiModel
 @Entity
 @Table(name = "T_USER_ACCOUNT")
 public class User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "用户id", dataType = "String", name = "uid", example = "UUID")
+    @NotBlank(message = "用户id不能为空")
     private String uid;
 
-    //用户唯一编码
-    private String union_id;
+    /**
+     * 用户唯一编码
+     */
+    @ApiModelProperty(value = "用户唯一编码", dataType = "String", name = "union_id")
+    @NotBlank(message = "用户唯一编码不能为空")
+    private String unionId;
 
-    //部门id
-    private Integer dept_id;
+    /**
+     * 部门
+     */
+    @ApiModelProperty(value = "部门", dataType = "Integer", name = "dept_id", example = "null")
+    private Integer deptId;
 
-    //分组id
-    private Integer group_id;
+    /**
+     * 分组
+     */
+    @ApiModelProperty(value = "分组", dataType = "Integer", name = "group_id", example = "null")
+    private Integer groupId;
 
-    //机构id
-    private Integer unit_id;
+    /**
+     * 机构
+     */
+    @ApiModelProperty(value = "机构", dataType = "Integer", name = "unit_id", example = "null")
+    private Integer unitId;
 
-    //用户凭证
+    /**
+     * 用户凭证
+     */
+    @ApiModelProperty(value = "用户凭证", dataType = "String", name = "token", example = "null")
     private String token;
 
-    //用户密码
+    /**
+     * 用户密码
+     */
+    @ApiModelProperty(value = "用户密码", dataType = "String", name = "password")
+    @NotBlank(message = "户密码不能为空")
     private String password;
 
-    //用户姓名
+    /**
+     * 用户姓名
+     */
+    @ApiModelProperty(value = "用户姓名", dataType = "String", name = "name", example = "null")
     private String name;
 
-    //身份证号
-    private String id_card;
+    /**
+     * 身份证号
+     */
+    @ApiModelProperty(value = "身份证号", dataType = "String", name = "id_card", example = "null")
+    private String idCard;
 
-    //手机号
+    /**
+     * 手机号
+     */
+    @ApiModelProperty(value = "手机号", dataType = "Integer", name = "phone", example = "null")
     private Long phone;
 
-    //微信标识
-    private String open_id;
+    /**
+     * 微信标识
+     */
+    @ApiModelProperty(value = "微信标识", dataType = "String", name = "open_id", example = "null")
+    private String openId;
 
-    //头像地址
-    private String avatar_url;
+    /**
+     * 头像地址
+     */
+    @ApiModelProperty(value = "头像地址", dataType = "String", name = "avatar_url", example = "null")
+    private String avatarUrl;
 
-    //创建时间
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date created_time;
+    /**
+     * 创建时间
+     */
+    @CreationTimestamp
+    @ApiModelProperty(value = "创建时间", dataType = "Timestamp", name = "created_time", example = "NOW()")
+    private Timestamp createdTime;
 
-    //修改时间
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updated_time;
+    /**
+     * 修改时间
+     */
+    @UpdateTimestamp
+    @ApiModelProperty(value = "修改时间", dataType = "Timestamp", name = "updated_time", example = "NOW()")
+    private Timestamp updatedTime;
 
-    //删除时间
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date deleted_time;
+    /**
+     * 删除时间
+     */
+    @ApiModelProperty(value = "删除时间", dataType = "Timestamp", name = "deleted_time", example = "null")
+    private Timestamp deletedTime;
 
     public User() {
     }
 
-    public User(String union_id, Integer dept_id, Integer group_id, Integer unit_id, String token, String password, String name, String id_card, Long phone, String open_id, String avatar_url, Date created_time, Date updated_time, Date deleted_time) {
-        this.union_id = union_id;
-        this.dept_id = dept_id;
-        this.group_id = group_id;
-        this.unit_id = unit_id;
+    public User(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, Integer deptId, Integer groupId, Integer unitId, String token, @NotBlank(message = "户密码不能为空") String password, String name, String idCard, Long phone, String openId, String avatarUrl, Timestamp createdTime, Timestamp updatedTime, Timestamp deletedTime) {
+        this.uid = uid;
+        this.unionId = unionId;
+        this.deptId = deptId;
+        this.groupId = groupId;
+        this.unitId = unitId;
         this.token = token;
         this.password = password;
         this.name = name;
-        this.id_card = id_card;
+        this.idCard = idCard;
         this.phone = phone;
-        this.open_id = open_id;
-        this.avatar_url = avatar_url;
-        this.created_time = created_time;
-        this.updated_time = updated_time;
-        this.deleted_time = deleted_time;
+        this.openId = openId;
+        this.avatarUrl = avatarUrl;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
+        this.deletedTime = deletedTime;
     }
 }

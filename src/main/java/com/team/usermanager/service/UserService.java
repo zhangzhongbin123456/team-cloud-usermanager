@@ -1,9 +1,6 @@
 package com.team.usermanager.service;
 
-import com.team.usermanager.domain.User;
 import com.team.usermanager.pojo.BaseResponse;
-
-import java.util.List;
 import java.util.Map;
 
 /**
