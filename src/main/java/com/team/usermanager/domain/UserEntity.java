@@ -39,20 +39,20 @@ public class UserEntity implements Serializable {
     /**
      * 部门
      */
-    @ApiModelProperty(value = "部门", dataType = "Integer", name = "dept_id", example = "null")
-    private Integer deptId;
+    @ApiModelProperty(value = "部门", dataType = "String", name = "dept_id", example = "null")
+    private String deptId;
 
     /**
      * 分组
      */
-    @ApiModelProperty(value = "分组", dataType = "Integer", name = "group_id", example = "null")
-    private Integer groupId;
+    @ApiModelProperty(value = "分组", dataType = "String", name = "group_id", example = "null")
+    private String groupId;
 
     /**
      * 机构
      */
-    @ApiModelProperty(value = "机构", dataType = "Integer", name = "unit_id", example = "null")
-    private Integer unitId;
+    @ApiModelProperty(value = "机构", dataType = "String", name = "unit_id", example = "null")
+    private String unitId;
 
     /**
      * 用户凭证
@@ -82,8 +82,8 @@ public class UserEntity implements Serializable {
     /**
      * 手机号
      */
-    @ApiModelProperty(value = "手机号", dataType = "Integer", name = "phone", example = "null")
-    private Long phone;
+    @ApiModelProperty(value = "手机号", dataType = "Integer", name = "String", example = "null")
+    private String phone;
 
     /**
      * 微信标识
@@ -120,7 +120,7 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    public UserEntity(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, Integer unitId, @NotBlank(message = "户密码不能为空") String password, String name, Long phone) {
+    public UserEntity(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, String unitId, @NotBlank(message = "户密码不能为空") String password, String name, String phone) {
         this.uid = uid;
         this.unionId = unionId;
         this.unitId = unitId;
@@ -129,7 +129,7 @@ public class UserEntity implements Serializable {
         this.phone = phone;
     }
 
-    public UserEntity(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, Integer deptId, Integer groupId, Integer unitId, String token, @NotBlank(message = "户密码不能为空") String password, String name, String idCard, Long phone, String openId, String avatarUrl, Timestamp createdTime, Timestamp updatedTime, Timestamp deletedTime) {
+    public UserEntity(@NotBlank(message = "用户id不能为空") String uid, @NotBlank(message = "用户唯一编码不能为空") String unionId, String deptId, String groupId, String unitId, String token, @NotBlank(message = "户密码不能为空") String password, String name, String idCard, String phone, String openId, String avatarUrl, Timestamp createdTime, Timestamp updatedTime, Timestamp deletedTime) {
         this.uid = uid;
         this.unionId = unionId;
         this.deptId = deptId;

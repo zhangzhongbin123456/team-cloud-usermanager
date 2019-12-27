@@ -14,9 +14,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class UserParam {
 
-    @ApiModelProperty(value = "用户账号", dataType = "String", name = "userName")
-    @NotBlank(message = "用户id不能为空")
-    public String userName;
+    @ApiModelProperty(value = "用户编码", dataType = "String", name = "unionId")
+    @NotBlank(message = "用户编码不能为空")
+    public String unionId;
 
     @ApiModelProperty(value = "用户密码", dataType = "String", name = "passWord", example = "123456")
     public String passWord;
@@ -24,8 +24,8 @@ public class UserParam {
     @ApiModelProperty(value = "用户姓名", dataType = "String", name = "name")
     public String name;
 
-    @ApiModelProperty(value = "手机号", dataType = "Long", name = "phone")
-    public Long phone;
+    @ApiModelProperty(value = "手机号", dataType = "String", name = "phone")
+    public String phone;
 
 
 }

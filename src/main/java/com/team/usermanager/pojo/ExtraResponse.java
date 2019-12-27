@@ -31,4 +31,12 @@ public class ExtraResponse extends BaseResponse {
         this(new BaseResponse(errorCode, errorMsg), extra);
     }
 
+    @Override
+    public String toString() {
+        return "ExtraResponse{" +
+                "extra=" + extra +
+                ", errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
+                '}';
+    }
 }

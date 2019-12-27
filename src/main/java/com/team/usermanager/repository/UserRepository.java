@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findFirstByName(String name);
+    UserEntity findFirstByUnionIdAndDeletedTimeIsNull(String name);
 
-    UserEntity findFirstByPhone(Long phone);
+    UserEntity findFirstByPhoneAndDeletedTimeIsNull(String phone);
 }

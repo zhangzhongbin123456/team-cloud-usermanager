@@ -32,6 +32,7 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'  //swagger页面样式依赖
     compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.22'  //swagger
     compile group: 'io.swagger', name: 'swagger-models', version: '1.5.22'  //swagger
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.6.RELEASE'
 }
 
 dependencyManagement {

@@ -21,7 +21,7 @@ import java.util.Objects;
  * @date: 2019/12/10
  */
 @Slf4j
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Resource
@@ -38,11 +38,14 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public BaseResponse login(UserParam userParam) {
-        if (StringUtils.isEmpty(userParam.userName) || StringUtils.isEmpty(userParam.passWord))
-            return BaseResponse.invalidParam("请输入用户名和密码");
-        UserEntity user = userRepository.findFirstByName(userParam.userName);
+        log.info("strat_time:{}", System.currentTimeMillis());
+        if (StringUtils.isEmpty(userParam.unionId) || StringUtils.isEmpty(userParam.passWord))
+            return BaseResponse.invalidParam("请输入账号和密码");
+        UserEntity user = userRepository.findFirstByUnionIdAndDeletedTimeIsNull(userParam.unionId);
         if (Objects.isNull(user)) return new BaseResponse(1100, "用户不存在");
         if (!user.getPassword().equals(userParam.passWord)) return new BaseResponse(1101, "密码错误");
+        log.info("end_time:{}", System.currentTimeMillis());
+        log.info("Response:{}", BaseResponse.SUCCESS.toString());
         return BaseResponse.SUCCESS;
     }
 
@@ -53,12 +56,12 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public BaseResponse register(UserParam userParam) {
-        if (!Objects.isNull(userRepository.findFirstByPhone(userParam.phone))) {
+        if (!Objects.isNull(userRepository.findFirstByPhoneAndDeletedTimeIsNull(userParam.phone))) {
             return new BaseResponse(1100, "手机号已被注册");
         }
         UserEntity user = userRepository.save(new UserEntity(UUIDGenerator.getUUID(),
                 new Date().getTime() + "" + userParam.phone,
-                1000, "123456", userParam.name, userParam.phone));
+                "1000", "123456", userParam.name, userParam.phone));
         if (Objects.isNull(user)) {
             return BaseResponse.FAIL;
         }
